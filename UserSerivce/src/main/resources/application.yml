@@ -1,0 +1,45 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+spring:
+  application:
+    name: user-service
+
+  profiles:
+    active: dev
+
+
+  config:
+    import: configserver:http://localhost:2222
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/userservice
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
