@@ -1,5 +1,7 @@
 package com.ecomm.order.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +31,7 @@ public class OrderItem {
 	private  Orders order;
 	
 	@Column(nullable = false)
-	private 	Integer productId;
+	private Integer productId;
 	
 	@Column(nullable = false)
 	private Integer variantId;
@@ -43,12 +45,12 @@ public class OrderItem {
 	
 	private String variantDescription;
 	
-	@Column(nullable = false)
-	private Double unitPrice;
+	@Column(nullable = false, precision = 10, scale = 2)
+	private BigDecimal unitPrice;
 	
 	@Column(nullable = false)
 	private Integer quantity;
 	
-	@Column(nullable = false)
-	private Double totalPrice;
+	@Column(nullable = false, precision = 10, scale = 2)
+	private BigDecimal totalPrice;
 }

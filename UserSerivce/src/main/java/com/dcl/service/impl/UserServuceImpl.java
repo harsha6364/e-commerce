@@ -38,7 +38,7 @@ public class UserServuceImpl implements UserService {
 
 	@Override
 	public UserDto register(RegisterRequest request) {
-User alreadyExists = urepo.findByEmail(request.getEmail()).orElse(null);
+		User alreadyExists = urepo.findByEmail(request.getEmail()).orElse(null);
 		
 		if(alreadyExists!= null) {
 			throw new AppException("User already exists!", HttpStatus.CONFLICT);

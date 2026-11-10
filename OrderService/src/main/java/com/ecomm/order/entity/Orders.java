@@ -1,14 +1,20 @@
 package com.ecomm.order.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.ecomm.enums.OrderStatusEnum;
+import com.ecomm.enums.PaymentStatusEnum;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,29 +36,32 @@ public class Orders {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 30)
 	private String orderNumber;
+
 	
 	@Column(nullable = false)
 	private Integer userId;
 	
 	@Column(nullable = false)
-	private String orderStatus;
+	@Enumerated(EnumType.STRING)
+	private OrderStatusEnum orderStatus;
 	
-	@Column(nullable = false)
-	private Double subTotal;
+	@Column(nullable = false, precision = 10, scale = 2)
+	private BigDecimal subTotal;
 	
-	@Column(nullable = false)
-	private Double gstAmount;
+	@Column(nullable = false, precision = 10, scale = 2)
+	private BigDecimal gstAmount;
 	
-	@Column(nullable = false)
-	private Double totalAmount;
+	@Column(nullable = false, precision = 10, scale = 2)
+	private BigDecimal totalAmount;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 3)
 	private String currency;
 	
 	@Column(nullable = false)
-	private String paymentStatus;
+	@Enumerated(EnumType.STRING)
+	private PaymentStatusEnum paymentStatus;
 	
 	@CreationTimestamp
 	@Column(updatable = false)
